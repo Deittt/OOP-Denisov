@@ -87,23 +87,6 @@ long* United_method() {
 
 
 
-double Three_sigma_method() {
-	srand(time(NULL));
-	double X[1000];
-	double sum = 0.;
-	long m = rand();
-	do {
-		for (int i = 0; i < 12; i++) {
-			sum = 0.;
-			sum += m / RAND_MAX;
-			sum -= 6.;
-			X[i] = sum + 3;
-
-		}
-	} while (-3.>sum||sum<3.);
-	
-	return X[6];
-}
 
 //Three_sigma_method
 float gaussrand(float MO, float sko)
