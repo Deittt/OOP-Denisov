@@ -9,7 +9,7 @@ long* Linear_method() {
 	srand(time(NULL));
 	long X[1000];
 	long a=2, c=3, m= 9241;
-	int x0 =rand();
+	int x0 =rand()%m;
 	X[0] = (a * x0 + c) % m;
 	for (int i = 0; i < 999; i++) {
 		X[i+1] = (a * X[i] + c) % m;
@@ -20,11 +20,32 @@ long* Linear_method() {
 long* Square_method() {
 	srand(time(NULL));
 	long X[1000];
-	long d=5,a = 2, c = 3, m = 9241;
-	int x0 = rand();
+	long d=1,a = 2, c = 3, m = 9241;
+	int x0 = rand()%m;
 	X[0] = (d * x0 * x0 + a * x0 + c) % m;
 	for (int i = 0; i < 999; i++) {
 		X[i + 1] = (d * X[i] * X[i] + a * X[i] + c) % m;
+	}
+	return X;
+}
+
+
+long* Fibonachi_method() {
+	srand(time(NULL));
+	long X[1000];
+	long  m = 9241;
+	int x0 = rand() % m;
+	X[0] = x0 % m;
+	X[1] = x0 % m;
+
+	for (int i = 0; i < 999; i++) {
+		if (i == 0) {
+			X[i] = x0 % m;
+		}
+		else {
+			X[i + 1] = (X[i] + X[i - 1]) % m;
+		}
+		
 	}
 	return X;
 }
@@ -43,6 +64,9 @@ void main(){
 	interval[7] = "[0,7; 0,8]";
 	interval[8] = "[0,8; 0,9]";
 	interval[9] = "[0,9; 1,0]";
+
+
+	double frequency[10];
 
 
 	int Method;
@@ -64,6 +88,39 @@ void main(){
 		for (int i = 0; i < 10; i++) {
 			
 			cout << interval[i]<<endl;
+
+		}
+	}
+
+	if (Method == 2) {
+		r = Square_method();
+		cout << "First 10 numbers: ";
+		for (int i = 0; i < 10; i++) {
+
+			cout << *(r + i) / (double)(9241) << " ";
+
+		}
+		cout << " " << endl;
+		for (int i = 0; i < 10; i++) {
+
+			cout << interval[i] << endl;
+
+		}
+	}
+
+
+	if (Method == 3) {
+		r = Fibonachi_method();
+		cout << "First 10 numbers: ";
+		for (int i = 0; i < 10; i++) {
+
+			cout << *(r + i) / (double)(9241) << " ";
+
+		}
+		cout << " " << endl;
+		for (int i = 0; i < 10; i++) {
+
+			cout << interval[i] << endl;
 
 		}
 	}
