@@ -179,11 +179,11 @@ double* Polar_coordinates_method(){
 	
 	
 	double X1[1000], X2[1000], V1[1000], V2[1000],S[1000];
-	double U1[3000],U2[3000];
-	for (int i = 0; i < 2999; i++) {
+	double U1[1000],U2[1000];
+	for (int i = 0; i < 999; i++) {
 		U1[i] = (double)(rand()) / RAND_MAX;
 	}
-	for (int i = 0; i < 2999; i++) {
+	for (int i = 0; i < 999; i++) {
 		U2[i] = (double)(rand()) / RAND_MAX;
 	}
 
@@ -195,15 +195,14 @@ double* Polar_coordinates_method(){
 	}
 	
 	for (int i = 0; i < 999; i++) {
-		S[i] = V1[i]*V1[i]+V2[i]*V2[i];
-		if (S[i] > 1||S[i]==1) {
-			    S[i] = 0;
-			    V1[i] = 0;
-			    V2[i] = 0;
-				V1[i] = (double)(2 * U1[i+1000] - 1);
-				V2[i] = (double)(2 * U2[i+1000] - 1);
-				S[i] = V1[i] * V1[i] + V2[i] * V2[i];
-			
+		
+		do{
+			U1[i] = (double)(rand()) / RAND_MAX;
+			U2[i] = (double)(rand()) / RAND_MAX;
+			V1[i] = (double)(2 * U1[i] - 1);
+			V2[i] = (double)(2 * U2[i] - 1);
+			S[i] = V1[i] * V1[i] + V2[i] * V2[i];
+				
 			/*for (int i = 0; i < 999; i++) {
 				V1[i] = (double)(2 * U1[i+1] - 1);
 			}
@@ -211,15 +210,15 @@ double* Polar_coordinates_method(){
 				V2[i] = (double)(2 * U2[i+1] - 1);
 			}
 			S[i] = V1[i] * V1[i] + V2[i] * V2[i];*/
-		}
+		} while (S[i] > 1 || S[i] == 1);
 	}
 
-	for (int i = 0; i < 999; i=i+2) {
+	for (int i = 0; i < 999; i++) {
 		
-		X1[i] = V1[i] * sqrt(((-2) * log(S[i]))/ S[i]);
-		X2[i] = V2[i] * sqrt(((-2) * log(S[i])) / S[i]);
+		X1[i] = (V1[i] * sqrt(((-2)*log(S[i]))/S[i])+3.0)/6.0;
+		X2[i] = (V2[i] * sqrt(((-2) * log(S[i])) / S[i])+3.0)/6.0;
 	}
-	return S;
+	return X1,X2;
 }
 
 
@@ -236,7 +235,7 @@ double* Ratio_method() {
 	}
 	for (int i = 0; i < 999; i++) {
 
-		//X[i] = sqrt(8 / M_E) * ((V[i] - 1 / 2) / U[i]);
+		
 		
 			do {
 				U[i] = (double)(rand()) / RAND_MAX + 1.0 / RAND_MAX;
@@ -264,16 +263,16 @@ double* Log_method() {
 
 double* Arsen_method() {
 
-	double X[1000], Y[1000], U[1000], a = 3;
-	//for (int i = 0; i < 999; i++) {
-
-	//}
+	double X[1000], Y[1000], U[1000], a = 2,V[1000];
+	for (int i = 0; i < 999; i++) {
+		V[i] = (double)(rand()) / RAND_MAX;
+	}
 	for (int i = 0; i < 999; i++) {
 		do {
 			U[i] = (double)(rand()) / RAND_MAX;
 			Y[i] = tan(M_PI * U[i]);
 			X[i] = sqrt(2 * a - 1) * Y[i] + a - 1;
-		} while (X[i] <= 0);
+		} while (X[i] <= 0||V[i]>((1+Y[i]*Y[i])*exp((a-1)*log(X[i]/(a-1))-sqrt(2*a-1)*Y[i])));
 	}
 	return X;
 }
@@ -430,11 +429,11 @@ void main(){
 	double* t;
 
 	if (Method == 7) {
-		cout << "Three_sigma_method" << endl;
+		cout << "Polar_coordinates_method" << endl;
 		cout << endl;
 		cout << "First 10 numbers: ";
 		t = Polar_coordinates_method();
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 10; i++) {
 
 			cout << *(t+i) << " ";
 
@@ -495,7 +494,7 @@ void main(){
 		cout << endl;
 		cout << "First 10 numbers: ";
 		t = Arsen_method();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 999; i++) {
 
 			cout << *(t + i)  << " ";
 
