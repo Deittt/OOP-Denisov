@@ -228,32 +228,52 @@ double* Ratio_method() {
 
 	double U[1000], V[1000], X[1000];
 	for (int i = 0; i < 999; i++) {
-		U[i] = (double)(rand()) / RAND_MAX;
-		if (U[i] == 0) {
-			U[i] = (double)(rand()) / RAND_MAX;
-		}
+		U[i] = (double)(rand()) / RAND_MAX+1.0/RAND_MAX;
+		
 	}
 	for (int i = 0; i < 999; i++) {
 		V[i] = (double)(rand()) / RAND_MAX;
 	}
 	for (int i = 0; i < 999; i++) {
 
-		X[i] = sqrt(8 / M_E) * ((V[i] - 1 / 2) / U[i]);
-		if (X[i] * X[i] < (-4) * log(U[i])) {
-			U[i] = 0;
-			V[i] = 0;
-			for (int i = 0; i < 999; i++) {
-				U[i] = (double)(rand()) / RAND_MAX;
-				if (U[i] == 0) {
-					U[i] = (double)(rand()) / RAND_MAX;
-				}
-			}
-			for (int i = 0; i < 999; i++) {
-				V[i] = (double)(rand()) / RAND_MAX;
-			}
-			X[i] = (double)(sqrt(8 / M_E) * ((V[i] - 1 / 2) / U[i]));
-		}
+		//X[i] = sqrt(8 / M_E) * ((V[i] - 1 / 2) / U[i]);
 		
+			do {
+				U[i] = (double)(rand()) / RAND_MAX + 1.0 / RAND_MAX;
+				V[i] = (double)(rand()) / RAND_MAX;
+				X[i] = sqrt(8 / M_E) * ((V[i] - 1 / 2) / U[i]);
+			} while (X[i] * X[i] >= (-4) * log(U[i])|| X[i]*X[i]>=(5-4*U[i]*pow(M_E,1/4))||X[i]*X[i]>=(4*pow(M_E,-1.35))/U[i]||X[i]>=1);
+		
+		
+	}
+	return X;
+}
+
+double* Log_method() {
+	
+	double X[1000], U[1000];
+	for (int i = 0; i < 999; i++) {
+		U[i] = (double)(rand()) / RAND_MAX;
+	}
+	for (int i = 0; i < 999; i++) {
+		X[i] = (-1.5) * log(U[i]);
+	}
+	return X;
+}
+
+
+double* Arsen_method() {
+
+	double X[1000], Y[1000], U[1000], a = 3;
+	//for (int i = 0; i < 999; i++) {
+
+	//}
+	for (int i = 0; i < 999; i++) {
+		do {
+			U[i] = (double)(rand()) / RAND_MAX;
+			Y[i] = tan(M_PI * U[i]);
+			X[i] = sqrt(2 * a - 1) * Y[i] + a - 1;
+		} while (X[i] <= 0);
 	}
 	return X;
 }
@@ -430,13 +450,54 @@ void main(){
 	}
 
 	if (Method == 8) {
-		cout << "Three_sigma_method" << endl;
+		cout << "Ratio_method" << endl;
 		cout << endl;
 		cout << "First 10 numbers: ";
 		t = Ratio_method();
 		for (int i = 0; i < 10; i++) {
 
 			cout << *(t + i) << " ";
+
+		}
+		cout << " " << endl;
+		for (int i = 0; i < 10; i++) {
+
+			cout << interval[i] << endl;
+
+		}
+
+
+	}
+
+
+	if (Method == 9) {
+		cout << "Three_sigma_method" << endl;
+		cout << endl;
+		cout << "First 10 numbers: ";
+		t = Log_method();
+		for (int i = 0; i < 999; i++) {
+
+			cout << *(t + i)/12 << " ";
+
+		}
+		cout << " " << endl;
+		for (int i = 0; i < 10; i++) {
+
+			cout << interval[i] << endl;
+
+		}
+
+
+	}
+
+	if (Method == 10) {
+		cout << "Three_sigma_method" << endl;
+		cout << endl;
+		cout << "First 10 numbers: ";
+		t = Arsen_method();
+		for (int i = 0; i < 10; i++) {
+
+			cout << *(t + i)  << " ";
 
 		}
 		cout << " " << endl;
