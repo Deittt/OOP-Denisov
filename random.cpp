@@ -1,12 +1,16 @@
-﻿#include <iostream>
+﻿//Pererva Antonina K-23
+#define _USE_MATH_DEFINES
+#include <iostream>
 #include <cmath>
 #include <stdlib.h>
 #include <ctime>
+#include <vector>
+
 
 using namespace std;
 
 long* Linear_method() {
-	srand(time(NULL));
+	
 	long X[1000];
 	long a=2, c=3, m= 9241;
 	int x0 =rand()%m;
@@ -18,7 +22,7 @@ long* Linear_method() {
 }
 
 long* Square_method() {
-	srand(time(NULL));
+	
 	long X[1000];
 	long d=1,a = 2, c = 3, m = 9241;
 	int x0 = rand()%m;
@@ -31,7 +35,7 @@ long* Square_method() {
 
 
 long* Fibonachi_method() {
-	srand(time(NULL));
+	
 	long X[1000];
 	long  m = 9241;
 	int x0 = rand() % m;
@@ -52,10 +56,25 @@ long* Fibonachi_method() {
 
 //QUESTIONS???????????????????????????????????????????????????
 long* Inverse_method() {
-	srand(time(NULL));
+	
 	long X[1000];
-	long  a = 21, c = 39, p = 16529,e=140;
-	int x0 = 1;
+	long  a = 5, c = 6, p = 1001,m=11;
+	int x0 =1;
+	double x1;
+	X[0] = 1; //(a / x0 + c) % p;
+	for (int i = 0; i < 999; i++) {
+		if (X[i] == 0) {
+			x1 = p;
+		}
+		else if (X[i] == p) {
+			x1 = 0;
+		}
+		else{
+			x1 = 1.0 / X[i];
+		}
+		X[i + 1] =(long)(a*x1 + c) % m;
+	}
+
 	
 	return X;
 }
@@ -63,13 +82,14 @@ long* Inverse_method() {
 
 
 long* United_method() {
-	srand(time(NULL));
+	
 	long X[1000];
 	long Z[1000];
 	long Y[1000];
 	long  m = 9241, p=16529,a=2,c=3;
 	int x0 = rand() % p;
 	int y0 = rand() % m;
+	
 	X[0] = (a * x0 + c) % p;
 	for (int i = 0; i < 999; i++) {
 		X[i + 1] = (a * X[i] + c) %p;
@@ -79,8 +99,15 @@ long* United_method() {
 		Y[i + 1] = (a * Y[i] +c) % m;
 	}
 	
-	for (int i = 0; i < 999; i++) {
-		Z[i] = (X[i] - Z[i]) % p;
+	for (int i = 0; i < 999; i++) {	
+			Z[i] = (X[i] - Y[i]) % p;
+			if (Z[i] < 0) {
+					X[i] = (a * X[i] + c) % p;
+					Y[i] = (a * Y[i] + c) % m;
+					Z[i] = (X[i] - Y[i]) % p;
+				}
+		
+		
 	}
 	return Z;
 }
@@ -118,7 +145,125 @@ void gen_array(const double N, const double M, const int Z, double* array)
 //End of Three_sigma_method
 
 
+//long* Polar_coordinates_method(long* X1, long* X2) {
+double* Polar_coordinates_method(){
+	
+    /*long S[1000],X1[1000],X2[1000];	
+	long V1[1000], V2[1000];
+	long U1[1000], U2[1000];
+	for (int i = 0; i < 999; i++) {
+		U1[i] = rand() % 1;
+		U2[i] = rand() % 1;
+	}
+	for (int i = 0; i < 999; i++) {
+		do {
+			
+
+			V1[i] = 2 * U1[i] - 1;
+			V2[i] = 2 * U2[i] - 1;
+
+
+			
+			S[i] = V1[i] * V1[i] + V2[i] * V2[i];
+			
+			
+			
+			
+		} while (S[i] >= 1);
+	}
+
+	for (int i = 0; i < 999; i++) {
+	X1[i] = V1[i] * sqrt(((-2) * log(S[i])) / S[i]);
+	//X2[i] = V2[i] * sqrt(((-2) * log(S[i])) / S[i]);
+	}*/
+	
+	
+	double X1[1000], X2[1000], V1[1000], V2[1000],S[1000];
+	double U1[3000],U2[3000];
+	for (int i = 0; i < 2999; i++) {
+		U1[i] = (double)(rand()) / RAND_MAX;
+	}
+	for (int i = 0; i < 2999; i++) {
+		U2[i] = (double)(rand()) / RAND_MAX;
+	}
+
+	for (int i = 0; i < 999; i++) {
+		V1[i] =(double)( 2 * U1[i] - 1);
+	}
+	for (int i = 0; i < 999; i++) {
+		V2[i] = (double)(2 * U2[i] - 1);
+	}
+	
+	for (int i = 0; i < 999; i++) {
+		S[i] = V1[i]*V1[i]+V2[i]*V2[i];
+		if (S[i] > 1||S[i]==1) {
+			    S[i] = 0;
+			    V1[i] = 0;
+			    V2[i] = 0;
+				V1[i] = (double)(2 * U1[i+1000] - 1);
+				V2[i] = (double)(2 * U2[i+1000] - 1);
+				S[i] = V1[i] * V1[i] + V2[i] * V2[i];
+			
+			/*for (int i = 0; i < 999; i++) {
+				V1[i] = (double)(2 * U1[i+1] - 1);
+			}
+			for (int i = 0; i < 999; i++) {
+				V2[i] = (double)(2 * U2[i+1] - 1);
+			}
+			S[i] = V1[i] * V1[i] + V2[i] * V2[i];*/
+		}
+	}
+
+	for (int i = 0; i < 999; i=i+2) {
+		
+		X1[i] = V1[i] * sqrt(((-2) * log(S[i]))/ S[i]);
+		X2[i] = V2[i] * sqrt(((-2) * log(S[i])) / S[i]);
+	}
+	return S;
+}
+
+
+
+double* Ratio_method() {
+
+	double U[1000], V[1000], X[1000];
+	for (int i = 0; i < 999; i++) {
+		U[i] = (double)(rand()) / RAND_MAX;
+		if (U[i] == 0) {
+			U[i] = (double)(rand()) / RAND_MAX;
+		}
+	}
+	for (int i = 0; i < 999; i++) {
+		V[i] = (double)(rand()) / RAND_MAX;
+	}
+	for (int i = 0; i < 999; i++) {
+
+		X[i] = sqrt(8 / M_E) * ((V[i] - 1 / 2) / U[i]);
+		if (X[i] * X[i] < (-4) * log(U[i])) {
+			U[i] = 0;
+			V[i] = 0;
+			for (int i = 0; i < 999; i++) {
+				U[i] = (double)(rand()) / RAND_MAX;
+				if (U[i] == 0) {
+					U[i] = (double)(rand()) / RAND_MAX;
+				}
+			}
+			for (int i = 0; i < 999; i++) {
+				V[i] = (double)(rand()) / RAND_MAX;
+			}
+			X[i] = (double)(sqrt(8 / M_E) * ((V[i] - 1 / 2) / U[i]));
+		}
+		
+	}
+	return X;
+}
+
+
+
 void main(){
+
+	
+	srand(time(NULL));
 
 	string interval[10];
 	interval[0] = "[0,0; 0,1]";
@@ -132,7 +277,8 @@ void main(){
 	interval[8] = "[0,8; 0,9]";
 	interval[9] = "[0,9; 1,0]";
 
-
+	
+	
 	
 
 
@@ -140,7 +286,9 @@ void main(){
 	cout << "Enter Method numer from 1 to 10 "<<endl;
 	cin >> Method;
 	long* r;
+	 
 	
+
 	if (Method <= 0 || Method>10) {
 		cout << "Please, enter number from 1 to 10";
 	}
@@ -205,7 +353,7 @@ void main(){
 		cout << "Inverse_method" << endl;
 		cout << endl;
 		cout << "First 10 numbers: ";
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 99; i++) {
 
 			cout << *(r + i)/(double)(9241) << " ";
 
@@ -259,6 +407,47 @@ void main(){
 		
 	}
 
+	double* t;
+
+	if (Method == 7) {
+		cout << "Three_sigma_method" << endl;
+		cout << endl;
+		cout << "First 10 numbers: ";
+		t = Polar_coordinates_method();
+		for (int i = 0; i < 100; i++) {
+
+			cout << *(t+i) << " ";
+
+		}
+		cout << " " << endl;
+		for (int i = 0; i < 10; i++) {
+
+			cout << interval[i] << endl;
+
+		}
+
+
+	}
+
+	if (Method == 8) {
+		cout << "Three_sigma_method" << endl;
+		cout << endl;
+		cout << "First 10 numbers: ";
+		t = Ratio_method();
+		for (int i = 0; i < 10; i++) {
+
+			cout << *(t + i) << " ";
+
+		}
+		cout << " " << endl;
+		for (int i = 0; i < 10; i++) {
+
+			cout << interval[i] << endl;
+
+		}
+
+
+	}
 }
 
 
