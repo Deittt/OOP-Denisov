@@ -266,24 +266,15 @@ double* Log_method() {
 
 double* Arsen_method() {
 
-	double Z[1000], Y[1000], U[1000], a = 3.0,V[1000];
-	/*for (int i = 0; i < 999; i++) {
-		V[i] = (double)(rand()) / RAND_MAX;
-		
-	}*/
+	double  X[1000],Y[1000], U[1000],V[1000];
+	double a = 3.0;
 	for (int i = 0; i < 999; i++) {
-		/*do {
-			U[i] = (double)(rand()) / RAND_MAX;
-			Y[i] = tan(M_PI * U[i]);
-			X[i] =  Y[i];
-			//V[i] = (double)(rand()) / RAND_MAX;
-		} while (X[i] <= 0. ); //||V[i] > ((1 + Y[i] * Y[i]) * exp((a - 1) * log(X[i] / (a - 1)) - sqrt(2 * a - 1) * Y[i])));*/
+		
 		do {
 			U[i] = (double)(rand()) / RAND_MAX;
-			//Y[i] = tan(M_PI * U[i]);
 			Y[i] = sqrt(2 * a - 1) * tan(M_PI * U[i]) + a - 1;
 			V[i] = (double)(rand()) / RAND_MAX;
-		} while (Y[i] <= 0 || V[i] > ((1 + tan(M_PI * U[i]) * tan(M_PI * U[i])) * exp((a - 1) * log(Y[i] / (a - 1)) - sqrt(2 * a - 1) * tan(M_PI * U[i])))||Y[i]>=6);
+		} while (Y[i] <= 0 || V[i] > ((1 + tan(M_PI * U[i]) * tan(M_PI * U[i])) * exp((a - 1) * log(Y[i] / (a - 1)) - sqrt(2 * a - 1) * tan(M_PI * U[i])))||Y[i]>=5);
 
 	}
 	return Y;
@@ -314,50 +305,50 @@ void main(){
 
 
 	int Method;
-	cout << "Enter Method numer from 1 to 10 "<<endl;
-	cin >> Method;
+	std::cout << "Enter Method numer from 1 to 10 "<<endl;
+	std::cin >> Method;
 	long* r;
 	 
 	//int k=0;
 
 	if (Method <= 0 || Method>10) {
-		cout << "Please, enter number from 1 to 10";
+		std::cout << "Please, enter number from 1 to 10";
 	}
 	if (Method == 1) {
 		r = Linear_method();
-		cout << "Linear_method" << endl;
-		cout << endl;
-		cout <<  "First 10 numbers: ";
+		std::cout << "Linear_method" << endl;
+		std::cout << endl;
+		std::cout <<  "First 10 numbers: ";
 		int i = 0;
 		
 		
 		for (int i = 0; i < 10; i++) {
 			
-			cout << *(r + i)/(double)(9241)  << " ";
+			std::cout << *(r + i)/(double)(9241)  << " ";
 
 		}
-		cout << " " << endl;
+		std::cout << " " << endl;
 		for (int i = 0; i < 10; i++) {
 			
-			cout << interval[i]<<endl;
+			std::cout << interval[i]<<endl;
 
 		}
 	}
 
 	if (Method == 2) {
 		r = Square_method();
-		cout << "Square_method" << endl;
-		cout << endl;
-		cout << "First 10 numbers: ";
+		std::cout << "Square_method" << endl;
+		std::cout << endl;
+		std::cout << "First 10 numbers: ";
 		for (int i = 0; i < 10; i++) {
 
-			cout << *(r + i) / (double)(9241) << " ";
+			std::cout << *(r + i) / (double)(9241) << " ";
 
 		}
-		cout << " " << endl;
+		std::cout << " " << endl;
 		for (int i = 0; i < 10; i++) {
 
-			cout << interval[i] << endl;
+			std::cout << interval[i] << endl;
 
 		}
 	}
@@ -365,18 +356,18 @@ void main(){
 
 	if (Method == 3) {
 		r = Fibonachi_method();
-		cout << "Fibonachi_method" << endl;
-		cout << endl;
-		cout << "First 10 numbers: ";
+		std::cout << "Fibonachi_method" << endl;
+		std::cout << endl;
+		std::cout << "First 10 numbers: ";
 		for (int i = 1; i < 11; i++) {
 
-			cout << *(r + i) / (double)(9241) << " ";
+			std::cout << *(r + i) / (double)(9241) << " ";
 
 		}
-		cout << " " << endl;
+		std::cout << " " << endl;
 		for (int i = 0; i < 10; i++) {
 
-			cout << interval[i] << endl;
+			std::cout << interval[i] << endl;
 
 		}
 	}
@@ -384,18 +375,18 @@ void main(){
 
 	if (Method == 4) {
 		r = Inverse_method();
-		cout << "Inverse_method" << endl;
-		cout << endl;
-		cout << "First 10 numbers: ";
+		std::cout << "Inverse_method" << endl;
+		std::cout << endl;
+		std::cout << "First 10 numbers: ";
 		for (int i = 0; i < 99; i++) {
 
-			cout << *(r + i)/(double)(9241) << " ";
+			std::cout << *(r + i)/(double)(9241) << " ";
 
 		}
-		cout << " " << endl;
+		std::cout << " " << endl;
 		for (int i = 0; i < 10; i++) {
 
-			cout << interval[i] << endl;
+			std::cout << interval[i] << endl;
 
 		}
 	}
@@ -403,38 +394,38 @@ void main(){
 
 	if (Method == 5) {
 		r = United_method();
-		cout << "United_method" << endl;
-		cout << endl;
-		cout << "First 10 numbers: ";
+		std::cout << "United_method" << endl;
+		std::cout << endl;
+		std::cout << "First 10 numbers: ";
 		for (int i = 0; i < 10; i++) {
 
-			cout << *(r + i) / (double)(16529) << " ";
+			std::cout << *(r + i) / (double)(16529) << " ";
 
 		}
-		cout << " " << endl;
+		std::cout << " " << endl;
 		for (int i = 0; i < 10; i++) {
 
-			cout << interval[i] << endl;
+			std::cout << interval[i] << endl;
 
 		}
 	}
 
 	
 	if (Method == 6) {
-		cout << "Three_sigma_method" << endl;
-		cout << endl;
-		cout << "First 10 numbers: ";
+		std::cout << "Three_sigma_method" << endl;
+		std::cout << endl;
+		std::cout << "First 10 numbers: ";
 		double array[1000];
 		gen_array(0, 1, 1000, array);
 		for (int i = 0; i < 10; i++) {
 
-			cout << array[i] << " ";
+			std::cout << array[i] << " ";
 
 		}
-		cout << " " << endl;
+		std::cout << " " << endl;
 		for (int i = 0; i < 10; i++) {
 
-			cout << interval[i] << endl;
+			std::cout << interval[i] << endl;
 
 		}
 
@@ -444,19 +435,19 @@ void main(){
 	double* t;
 
 	if (Method == 7) {
-		cout << "Polar_coordinates_method" << endl;
-		cout << endl;
-		cout << "First 10 numbers: ";
+		std::cout << "Polar_coordinates_method" << endl;
+		std::cout << endl;
+		std::cout << "First 10 numbers: ";
 		t = Polar_coordinates_method();
 		for (int i = 0; i < 10; i++) {
 
-			cout << *(t+i) << " ";
+			std::cout << *(t+i) << " ";
 
 		}
-		cout << " " << endl;
+		std::cout << " " << endl;
 		for (int i = 0; i < 10; i++) {
 
-			cout << interval[i] << endl;
+			std::cout << interval[i] << endl;
 
 		}
 
@@ -464,19 +455,19 @@ void main(){
 	}
 
 	if (Method == 8) {
-		cout << "Ratio_method" << endl;
-		cout << endl;
-		cout << "First 10 numbers: ";
+		std::cout << "Ratio_method" << endl;
+		std::cout << endl;
+		std::cout << "First 10 numbers: ";
 		t = Ratio_method();
 		for (int i = 0; i < 10; i++) {
 
-			cout << *(t + i) << " ";
+			std::cout << *(t + i) << " ";
 
 		}
-		cout << " " << endl;
+		std::cout << " " << endl;
 		for (int i = 0; i < 10; i++) {
 
-			cout << interval[i] << endl;
+			std::cout << interval[i] << endl;
 
 		}
 
@@ -485,19 +476,19 @@ void main(){
 
 
 	if (Method == 9) {
-		cout << "Log_method" << endl;
-		cout << endl;
-		cout << "First 10 numbers: ";
+		std::cout << "Log_method" << endl;
+		std::cout << endl;
+		std::cout << "First 10 numbers: ";
 		t = Log_method();
 		for (int i = 0; i < 999; i++) {
 
-			cout << *(t + i) << " ";
+			std::cout << *(t + i) << " ";
 
 		}
-		cout << " " << endl;
+		std::cout << " " << endl;
 		for (int i = 0; i < 10; i++) {
 
-			cout << interval[i] << endl;
+			std::cout << interval[i] << endl;
 
 		}
 
@@ -505,19 +496,19 @@ void main(){
 	}
 
 	if (Method == 10) {
-		cout << "Arsen_method" << endl;
-		cout << endl;
-		cout << "First 10 numbers: ";
+		std::cout << "Arsen_method" << endl;
+		std::cout << endl;
+		std::cout << "First 10 numbers: ";
 		t = Arsen_method();
 		for (int i = 0; i < 999; i++) {
 
-			cout << *(t + i)/6 << " ";
+			std::cout << *(t + i)/5 << " ";
 
 		}
-		cout << " " << endl;
+		std::cout << " " << endl;
 		for (int i = 0; i < 10; i++) {
 
-			cout << interval[i] << endl;
+			std::cout << interval[i] << endl;
 
 		}
 
