@@ -57,7 +57,7 @@ long* Fibonachi_method() {
 //QUESTIONS???????????????????????????????????????????????????
 long* Inverse_method() {
 	
-	long X[1000];
+	long Z[1000],X[1000];
 	long  a = 5, c = 6, p = 1001,m=11;
 	//int x0 =1;
 	//double x1;
@@ -248,7 +248,7 @@ double* Ratio_method() {
 
 double* Log_method() {
 	
-	double X[1000], U[1000];
+	double Z[1000],X[1000], U[1000];
 	for (int i = 0; i < 999; i++) {
 		do {
 			U[i] = (double)(rand()) / RAND_MAX;
@@ -257,7 +257,7 @@ double* Log_method() {
 	for (int i = 0; i < 999; i++) {
 		do {
 			X[i] = (-1.5) * log(U[i]);
-		} while (X[i]<0);
+		} while (X[i]<0|| X[i]>=11);
 	}
 	
 	return X;
@@ -266,18 +266,19 @@ double* Log_method() {
 
 double* Arsen_method() {
 
-	double  X[1000],Y[1000], U[1000],V[1000];
+	double  K[1000],X[1000],Y[1000], U[1000],V[1000];
 	double a = 3.0;
 	for (int i = 0; i < 999; i++) {
 		
 		do {
-			U[i] = (double)(rand()) / RAND_MAX;
-			Y[i] = sqrt(2 * a - 1) * tan(M_PI * U[i]) + a - 1;
+			U[i] = (double)(rand()) / RAND_MAX;			
+			Y[i] = tan(M_PI * U[i]);
+			X[i]= sqrt(2 * a - 1) * Y[i] + a - 1;
 			V[i] = (double)(rand()) / RAND_MAX;
-		} while (Y[i] <= 0 || V[i] > ((1 + tan(M_PI * U[i]) * tan(M_PI * U[i])) * exp((a - 1) * log(Y[i] / (a - 1)) - sqrt(2 * a - 1) * tan(M_PI * U[i])))||Y[i]>=5);
+		} while (X[i] <= 0 || V[i] > ((1 + Y[i] * Y[i]) * exp((a - 1) * log(X[i] / (a - 1)) - sqrt(2 * a - 1) * Y[i]))||X[i]>=5);
 
 	}
-	return Y;
+	return X;
 }
 
 
@@ -482,7 +483,7 @@ void main(){
 		t = Log_method();
 		for (int i = 0; i < 999; i++) {
 
-			std::cout << *(t + i) << " ";
+			std::cout << *(t + i)/11 << " ";
 
 		}
 		std::cout << " " << endl;
