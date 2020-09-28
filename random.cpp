@@ -59,20 +59,18 @@ long* Inverse_method() {
 	
 	long X[1000];
 	long  a = 5, c = 6, p = 1001,m=11;
-	int x0 =1;
-	double x1;
+	//int x0 =1;
+	//double x1;
 	X[0] = 1; //(a / x0 + c) % p;
 	for (int i = 0; i < 999; i++) {
+		
 		if (X[i] == 0) {
-			x1 = p;
+			X[i + 1] = (a * p + c) % m;
 		}
-		else if (X[i] == p) {
-			x1 = 0;
+		else {
+			X[i + 1] = (a / X[i] + c) % m;
 		}
-		else{
-			x1 = 1.0 / X[i];
-		}
-		X[i + 1] =(long)(a*x1 + c) % m;
+		
 	}
 
 	
@@ -252,29 +250,43 @@ double* Log_method() {
 	
 	double X[1000], U[1000];
 	for (int i = 0; i < 999; i++) {
-		U[i] = (double)(rand()) / RAND_MAX;
+		do {
+			U[i] = (double)(rand()) / RAND_MAX;
+		} while (U == 0);
 	}
 	for (int i = 0; i < 999; i++) {
-		X[i] = (-1.5) * log(U[i]);
+		do {
+			X[i] = (-1.5) * log(U[i]);
+		} while (X[i]<0);
 	}
+	
 	return X;
 }
 
 
 double* Arsen_method() {
 
-	double X[1000], Y[1000], U[1000], a = 2,V[1000];
-	for (int i = 0; i < 999; i++) {
+	double Z[1000], Y[1000], U[1000], a = 3.0,V[1000];
+	/*for (int i = 0; i < 999; i++) {
 		V[i] = (double)(rand()) / RAND_MAX;
-	}
+		
+	}*/
 	for (int i = 0; i < 999; i++) {
-		do {
+		/*do {
 			U[i] = (double)(rand()) / RAND_MAX;
 			Y[i] = tan(M_PI * U[i]);
-			X[i] = sqrt(2 * a - 1) * Y[i] + a - 1;
-		} while (X[i] <= 0||V[i]>((1+Y[i]*Y[i])*exp((a-1)*log(X[i]/(a-1))-sqrt(2*a-1)*Y[i])));
+			X[i] =  Y[i];
+			//V[i] = (double)(rand()) / RAND_MAX;
+		} while (X[i] <= 0. ); //||V[i] > ((1 + Y[i] * Y[i]) * exp((a - 1) * log(X[i] / (a - 1)) - sqrt(2 * a - 1) * Y[i])));*/
+		do {
+			U[i] = (double)(rand()) / RAND_MAX;
+			//Y[i] = tan(M_PI * U[i]);
+			Y[i] = sqrt(2 * a - 1) * tan(M_PI * U[i]) + a - 1;
+			V[i] = (double)(rand()) / RAND_MAX;
+		} while (Y[i] <= 0 || V[i] > ((1 + tan(M_PI * U[i]) * tan(M_PI * U[i])) * exp((a - 1) * log(Y[i] / (a - 1)) - sqrt(2 * a - 1) * tan(M_PI * U[i])))||Y[i]>=6);
+
 	}
-	return X;
+	return Y;
 }
 
 
@@ -306,7 +318,7 @@ void main(){
 	cin >> Method;
 	long* r;
 	 
-	
+	//int k=0;
 
 	if (Method <= 0 || Method>10) {
 		cout << "Please, enter number from 1 to 10";
@@ -316,6 +328,9 @@ void main(){
 		cout << "Linear_method" << endl;
 		cout << endl;
 		cout <<  "First 10 numbers: ";
+		int i = 0;
+		
+		
 		for (int i = 0; i < 10; i++) {
 			
 			cout << *(r + i)/(double)(9241)  << " ";
@@ -470,13 +485,13 @@ void main(){
 
 
 	if (Method == 9) {
-		cout << "Three_sigma_method" << endl;
+		cout << "Log_method" << endl;
 		cout << endl;
 		cout << "First 10 numbers: ";
 		t = Log_method();
 		for (int i = 0; i < 999; i++) {
 
-			cout << *(t + i)/12 << " ";
+			cout << *(t + i) << " ";
 
 		}
 		cout << " " << endl;
@@ -490,13 +505,13 @@ void main(){
 	}
 
 	if (Method == 10) {
-		cout << "Three_sigma_method" << endl;
+		cout << "Arsen_method" << endl;
 		cout << endl;
 		cout << "First 10 numbers: ";
 		t = Arsen_method();
 		for (int i = 0; i < 999; i++) {
 
-			cout << *(t + i)  << " ";
+			cout << *(t + i)/6 << " ";
 
 		}
 		cout << " " << endl;
