@@ -57,7 +57,7 @@ long* Fibonachi_method() {
 //QUESTIONS???????????????????????????????????????????????????
 long* Inverse_method() {
 	
-	long Z[1000],X[1000];
+	long X[1000];
 	long  a = 5, c = 6, p = 1001,m=11;
 	//int x0 =1;
 	//double x1;
@@ -143,37 +143,10 @@ void gen_array(const double N, const double M, const int Z, double* array)
 //End of Three_sigma_method
 
 
-//long* Polar_coordinates_method(long* X1, long* X2) {
+
 double* Polar_coordinates_method(){
 	
-    /*long S[1000],X1[1000],X2[1000];	
-	long V1[1000], V2[1000];
-	long U1[1000], U2[1000];
-	for (int i = 0; i < 999; i++) {
-		U1[i] = rand() % 1;
-		U2[i] = rand() % 1;
-	}
-	for (int i = 0; i < 999; i++) {
-		do {
-			
-
-			V1[i] = 2 * U1[i] - 1;
-			V2[i] = 2 * U2[i] - 1;
-
-
-			
-			S[i] = V1[i] * V1[i] + V2[i] * V2[i];
-			
-			
-			
-			
-		} while (S[i] >= 1);
-	}
-
-	for (int i = 0; i < 999; i++) {
-	X1[i] = V1[i] * sqrt(((-2) * log(S[i])) / S[i]);
-	//X2[i] = V2[i] * sqrt(((-2) * log(S[i])) / S[i]);
-	}*/
+   
 	
 	
 	double X1[1000], X2[1000], V1[1000], V2[1000],S[1000];
@@ -201,13 +174,7 @@ double* Polar_coordinates_method(){
 			V2[i] = (double)(2 * U2[i] - 1);
 			S[i] = V1[i] * V1[i] + V2[i] * V2[i];
 				
-			/*for (int i = 0; i < 999; i++) {
-				V1[i] = (double)(2 * U1[i+1] - 1);
-			}
-			for (int i = 0; i < 999; i++) {
-				V2[i] = (double)(2 * U2[i+1] - 1);
-			}
-			S[i] = V1[i] * V1[i] + V2[i] * V2[i];*/
+			
 		} while (S[i] > 1 || S[i] == 1);
 	}
 
@@ -257,7 +224,7 @@ double* Log_method() {
 	for (int i = 0; i < 999; i++) {
 		do {
 			X[i] = (-1.5) * log(U[i]);
-		} while (X[i]<0|| X[i]>=11);
+		} while (X[i]<0);
 	}
 	
 	return X;
@@ -302,7 +269,6 @@ void main(){
 
 	
 	
-	
 
 
 	int Method;
@@ -310,7 +276,17 @@ void main(){
 	std::cin >> Method;
 	long* r;
 	 
-	//int k=0;
+
+	int k = 0,m=0,l=0,s=0,z=0,j=0,p=0,y=0,h=0,n=0;
+	int frequency[10];
+	/*for (int i = 0; i < 999; i++) {
+		r = Linear_method();
+		if (*(r + i) / (double)(9241) < 0.1) {
+			k++;
+		}
+		
+	}
+	cout << k << endl;*/
 
 	if (Method <= 0 || Method>10) {
 		std::cout << "Please, enter number from 1 to 10";
@@ -322,6 +298,48 @@ void main(){
 		std::cout <<  "First 10 numbers: ";
 		int i = 0;
 		
+		for (int i = 0; i < 999; i++) {			
+			if (*(r + i) / (double)(9241) <= 0.1) {
+				k++;
+				frequency[0] = k;
+			}
+			if (*(r + i) / (double)(9241)>0.1 &&*(r + i) / (double)(9241) <= 0.2) {
+				m++;
+				frequency[1] = m;
+			}
+			if (*(r + i) / (double)(9241) > 0.2 && *(r + i) / (double)(9241) <= 0.3) {
+				l++;
+				frequency[2] = l;
+			}
+			if (*(r + i) / (double)(9241) > 0.3 && *(r + i) / (double)(9241) <= 0.4) {
+				s++;
+				frequency[3] = s;
+			}
+			if (*(r + i) / (double)(9241) > 0.4 && *(r + i) / (double)(9241) <= 0.5) {
+				s++;
+				frequency[4] = s;
+			}
+			if (*(r + i) / (double)(9241) > 0.5 && *(r + i) / (double)(9241) <= 0.6) {
+				z++;
+				frequency[5] = z;
+			}
+			if (*(r + i) / (double)(9241) > 0.6 && *(r + i) / (double)(9241) <= 0.7) {
+				j++;
+				frequency[6] = j;
+			}
+			if (*(r + i) / (double)(9241) > 0.7 && *(r + i) / (double)(9241) <= 0.8) {
+				p++;
+				frequency[7] = p;
+			}
+			if (*(r + i) / (double)(9241) > 0.8 && *(r + i) / (double)(9241) <= 0.9) {
+				y++;
+				frequency[8] = y;
+			}
+			if (*(r + i) / (double)(9241) > 0.9 && *(r + i) / (double)(9241) <= 1.0) {
+				h++;
+				frequency[9] = h;
+			}
+		}
 		
 		for (int i = 0; i < 10; i++) {
 			
@@ -331,7 +349,7 @@ void main(){
 		std::cout << " " << endl;
 		for (int i = 0; i < 10; i++) {
 			
-			std::cout << interval[i]<<endl;
+			std::cout << interval[i]<<" "<<frequency[i]<<endl;
 
 		}
 	}
@@ -347,9 +365,51 @@ void main(){
 
 		}
 		std::cout << " " << endl;
+		for (int i = 0; i < 999; i++) {
+			if (*(r + i) / (double)(9241) <= 0.1) {
+				k++;
+				frequency[0] = k;
+			}
+			if (*(r + i) / (double)(9241) > 0.1 && *(r + i) / (double)(9241) <= 0.2) {
+				m++;
+				frequency[1] = m;
+			}
+			if (*(r + i) / (double)(9241) > 0.2 && *(r + i) / (double)(9241) <= 0.3) {
+				l++;
+				frequency[2] = l;
+			}
+			if (*(r + i) / (double)(9241) > 0.3 && *(r + i) / (double)(9241) <= 0.4) {
+				s++;
+				frequency[3] = s;
+			}
+			if (*(r + i) / (double)(9241) > 0.4 && *(r + i) / (double)(9241) <= 0.5) {
+				s++;
+				frequency[4] = s;
+			}
+			if (*(r + i) / (double)(9241) > 0.5 && *(r + i) / (double)(9241) <= 0.6) {
+				z++;
+				frequency[5] = z;
+			}
+			if (*(r + i) / (double)(9241) > 0.6 && *(r + i) / (double)(9241) <= 0.7) {
+				j++;
+				frequency[6] = j;
+			}
+			if (*(r + i) / (double)(9241) > 0.7 && *(r + i) / (double)(9241) <= 0.8) {
+				p++;
+				frequency[7] = p;
+			}
+			if (*(r + i) / (double)(9241) > 0.8 && *(r + i) / (double)(9241) <= 0.9) {
+				y++;
+				frequency[8] = y;
+			}
+			if (*(r + i) / (double)(9241) > 0.9 && *(r + i) / (double)(9241) <= 1.0) {
+				h++;
+				frequency[9] = h;
+			}
+		}
 		for (int i = 0; i < 10; i++) {
 
-			std::cout << interval[i] << endl;
+			std::cout << interval[i]<<" "<<frequency[i] << endl;
 
 		}
 	}
@@ -366,9 +426,51 @@ void main(){
 
 		}
 		std::cout << " " << endl;
+		for (int i = 0; i < 999; i++) {
+			if (*(r + i) / (double)(9241) <= 0.1) {
+				k++;
+				frequency[0] = k;
+			}
+			if (*(r + i) / (double)(9241) > 0.1 && *(r + i) / (double)(9241) <= 0.2) {
+				m++;
+				frequency[1] = m;
+			}
+			if (*(r + i) / (double)(9241) > 0.2 && *(r + i) / (double)(9241) <= 0.3) {
+				l++;
+				frequency[2] = l;
+			}
+			if (*(r + i) / (double)(9241) > 0.3 && *(r + i) / (double)(9241) <= 0.4) {
+				s++;
+				frequency[3] = s;
+			}
+			if (*(r + i) / (double)(9241) > 0.4 && *(r + i) / (double)(9241) <= 0.5) {
+				s++;
+				frequency[4] = s;
+			}
+			if (*(r + i) / (double)(9241) > 0.5 && *(r + i) / (double)(9241) <= 0.6) {
+				z++;
+				frequency[5] = z;
+			}
+			if (*(r + i) / (double)(9241) > 0.6 && *(r + i) / (double)(9241) <= 0.7) {
+				j++;
+				frequency[6] = j;
+			}
+			if (*(r + i) / (double)(9241) > 0.7 && *(r + i) / (double)(9241) <= 0.8) {
+				p++;
+				frequency[7] = p;
+			}
+			if (*(r + i) / (double)(9241) > 0.8 && *(r + i) / (double)(9241) <= 0.9) {
+				y++;
+				frequency[8] = y;
+			}
+			if (*(r + i) / (double)(9241) > 0.9 && *(r + i) / (double)(9241) <= 1.0) {
+				h++;
+				frequency[9] = h;
+			}
+		}
 		for (int i = 0; i < 10; i++) {
 
-			std::cout << interval[i] << endl;
+			std::cout << interval[i]<<" "<<frequency[i]<< endl;
 
 		}
 	}
@@ -385,6 +487,7 @@ void main(){
 
 		}
 		std::cout << " " << endl;
+
 		for (int i = 0; i < 10; i++) {
 
 			std::cout << interval[i] << endl;
@@ -404,9 +507,53 @@ void main(){
 
 		}
 		std::cout << " " << endl;
+
+		for (int i = 0; i < 999; i++) {
+			if (*(r + i) / (double)(16529) <= 0.1) {
+				k++;
+				frequency[0] = k;
+			}
+			if (*(r + i) / (double)(16529) > 0.1 && *(r + i) / (double)(16529) <= 0.2) {
+				m++;
+				frequency[1] = m;
+			}
+			if (*(r + i) / (double)(16529) > 0.2 && *(r + i) / (double)(16529) <= 0.3) {
+				l++;
+				frequency[2] = l;
+			}
+			if (*(r + i) / (double)(16529) > 0.3 && *(r + i) / (double)(16529) <= 0.4) {
+				s++;
+				frequency[3] = s;
+			}
+			if (*(r + i) / (double)(16529) > 0.4 && *(r + i) / (double)(16529) <= 0.5) {
+				s++;
+				frequency[4] = s;
+			}
+			if (*(r + i) / (double)(16529) > 0.5 && *(r + i) / (double)(16529) <= 0.6) {
+				z++;
+				frequency[5] = z;
+			}
+			if (*(r + i) / (double)(16529) > 0.6 && *(r + i) / (double)(16529) <= 0.7) {
+				j++;
+				frequency[6] = j;
+			}
+			if (*(r + i) / (double)(16529) > 0.7 && *(r + i) / (double)(16529) <= 0.8) {
+				p++;
+				frequency[7] = p;
+			}
+			if (*(r + i) / (double)(16529) > 0.8 && *(r + i) / (double)(16529) <= 0.9) {
+				y++;
+				frequency[8] = y;
+			}
+			if (*(r + i) / (double)(16529) > 0.9 && *(r + i) / (double)(16529) <= 1.0) {
+				h++;
+				frequency[9] = h;
+			}
+		}
+
 		for (int i = 0; i < 10; i++) {
 
-			std::cout << interval[i] << endl;
+			std::cout << interval[i]<<" "<<frequency[i] << endl;
 
 		}
 	}
@@ -424,9 +571,53 @@ void main(){
 
 		}
 		std::cout << " " << endl;
+
+		for (int i = 0; i < 999; i++) {
+			if (array[i] <= 0.1) {
+				k++;
+				frequency[0] = k;
+			}
+			if (array[i] > 0.1 && array[i] <= 0.2) {
+				m++;
+				frequency[1] = m;
+			}
+			if (array[i] > 0.2 && array[i] <= 0.3) {
+				l++;
+				frequency[2] = l;
+			}
+			if (array[i] > 0.3 && array[i] <= 0.4) {
+				s++;
+				frequency[3] = s;
+			}
+			if (array[i] > 0.4 && array[i] <= 0.5) {
+				s++;
+				frequency[4] = s;
+			}
+			if (array[i] > 0.5 && array[i] <= 0.6) {
+				z++;
+				frequency[5] = z;
+			}
+			if (array[i] > 0.6 && array[i] <= 0.7) {
+				j++;
+				frequency[6] = j;
+			}
+			if (array[i] > 0.7 && array[i] <= 0.8) {
+				p++;
+				frequency[7] = p;
+			}
+			if (array[i] > 0.8 && array[i] <= 0.9) {
+				y++;
+				frequency[8] = y;
+			}
+			if (array[i] > 0.9 && array[i] <= 1.0) {
+				h++;
+				frequency[9] = h;
+			}
+		}
+
 		for (int i = 0; i < 10; i++) {
 
-			std::cout << interval[i] << endl;
+			std::cout << interval[i]<<" "<<frequency[i] << endl;
 
 		}
 
@@ -446,9 +637,53 @@ void main(){
 
 		}
 		std::cout << " " << endl;
+
+		for (int i = 0; i < 999; i++) {
+			if (*(t + i) <= 0.1) {
+				k++;
+				frequency[0] = k;
+			}
+			if (*(t + i) > 0.1 && *(t + i) <= 0.2) {
+				m++;
+				frequency[1] = m;
+			}
+			if (*(t + i) > 0.2 && *(t + i) <= 0.3) {
+				l++;
+				frequency[2] = l;
+			}
+			if (*(t + i) > 0.3 && *(t + i) <= 0.4) {
+				s++;
+				frequency[3] = s;
+			}
+			if (*(t + i) > 0.4 && *(t + i) <= 0.5) {
+				s++;
+				frequency[4] = s;
+			}
+			if (*(t + i) > 0.5 && *(t + i) <= 0.6) {
+				z++;
+				frequency[5] = z;
+			}
+			if (*(t + i) > 0.6 && *(t + i) <= 0.7) {
+				j++;
+				frequency[6] = j;
+			}
+			if (*(t + i) > 0.7 && *(t + i) <= 0.8) {
+				p++;
+				frequency[7] = p;
+			}
+			if (*(t + i) > 0.8 && *(t + i) <= 0.9) {
+				y++;
+				frequency[8] = y;
+			}
+			if (*(t + i) > 0.9 && *(t + i) <= 1.0) {
+				h++;
+				frequency[9] = h;
+			}
+		}
+
 		for (int i = 0; i < 10; i++) {
 
-			std::cout << interval[i] << endl;
+			std::cout << interval[i]<<" "<<frequency[i] << endl;
 
 		}
 
@@ -466,9 +701,53 @@ void main(){
 
 		}
 		std::cout << " " << endl;
+
+		for (int i = 0; i < 999; i++) {
+			if (*(t + i) <= 0.1) {
+				k++;
+				frequency[0] = k;
+			}
+			if (*(t + i) > 0.1 && *(t + i) <= 0.2) {
+				m++;
+				frequency[1] = m;
+			}
+			if (*(t + i) > 0.2 && *(t + i) <= 0.3) {
+				l++;
+				frequency[2] = l;
+			}
+			if (*(t + i) > 0.3 && *(t + i) <= 0.4) {
+				s++;
+				frequency[3] = s;
+			}
+			if (*(t + i) > 0.4 && *(t + i) <= 0.5) {
+				s++;
+				frequency[4] = s;
+			}
+			if (*(t + i) > 0.5 && *(t + i) <= 0.6) {
+				z++;
+				frequency[5] = z;
+			}
+			if (*(t + i) > 0.6 && *(t + i) <= 0.7) {
+				j++;
+				frequency[6] = j;
+			}
+			if (*(t + i) > 0.7 && *(t + i) <= 0.8) {
+				p++;
+				frequency[7] = p;
+			}
+			if (*(t + i) > 0.8 && *(t + i) <= 0.9) {
+				y++;
+				frequency[8] = y;
+			}
+			if (*(t + i) > 0.9 && *(t + i) <= 1.0) {
+				h++;
+				frequency[9] = h;
+			}
+		}
+
 		for (int i = 0; i < 10; i++) {
 
-			std::cout << interval[i] << endl;
+			std::cout << interval[i]<<" "<<frequency[i] << endl;
 
 		}
 
@@ -481,15 +760,59 @@ void main(){
 		std::cout << endl;
 		std::cout << "First 10 numbers: ";
 		t = Log_method();
-		for (int i = 0; i < 999; i++) {
+		for (int i = 0; i < 10; i++) {
 
 			std::cout << *(t + i)/11 << " ";
 
 		}
 		std::cout << " " << endl;
+
+		for (int i = 0; i < 999; i++) {
+			if (*(t + i)/11 <= 0.1) {
+				k++;
+				frequency[0] = k;
+			}
+			if (*(t + i)/11 > 0.1 && *(t + i)/11 <= 0.2) {
+				m++;
+				frequency[1] = m;
+			}
+			if (*(t + i)/11 > 0.2 && *(t + i)/11 <= 0.3) {
+				l++;
+				frequency[2] = l;
+			}
+			if (*(t + i)/11 > 0.3 && *(t + i)/11 <= 0.4) {
+				s++;
+				frequency[3] = s;
+			}
+			if (*(t + i)/11 > 0.4 && *(t + i)/11 <= 0.5) {
+				s++;
+				frequency[4] = s;
+			}
+			if (*(t + i)/11 > 0.5 && *(t + i)/11 <= 0.6) {
+				z++;
+				frequency[5] = z;
+			}
+			if (*(t + i)/11 > 0.6 && *(t + i)/11 <= 0.7) {
+				j++;
+				frequency[6] = j;
+			}
+			if (*(t + i)/11 > 0.7 && *(t + i)/11 <= 0.8) {
+				p++;
+				frequency[7] = p;
+			}
+			if (*(t + i)/11 > 0.8 && *(t + i)/11 <= 0.9) {
+				y++;
+				frequency[8] = y;
+			}
+			if (*(t + i)/11 > 0.9 && *(t + i)/11 <= 1.0) {
+				h++;
+				frequency[9] = h;
+			}
+		}
+		
 		for (int i = 0; i < 10; i++) {
 
-			std::cout << interval[i] << endl;
+			std::cout << interval[i] << " "<< frequency[i] << endl;
 
 		}
 
@@ -501,15 +824,59 @@ void main(){
 		std::cout << endl;
 		std::cout << "First 10 numbers: ";
 		t = Arsen_method();
-		for (int i = 0; i < 999; i++) {
+		for (int i = 0; i < 10; i++) {
 
 			std::cout << *(t + i)/5 << " ";
 
 		}
 		std::cout << " " << endl;
+
+		for (int i = 0; i < 999; i++) {
+			if (*(t + i) / 5 <= 0.1) {
+				k++;
+				frequency[0] = k;
+			}
+			if (*(t + i) / 5 > 0.1 && *(t + i) / 5 <= 0.2) {
+				m++;
+				frequency[1] = m;
+			}
+			if (*(t + i) / 5 > 0.2 && *(t + i) / 5 <= 0.3) {
+				l++;
+				frequency[2] = l;
+			}
+			if (*(t + i) / 5 > 0.3 && *(t + i) / 5 <= 0.4) {
+				s++;
+				frequency[3] = s;
+			}
+			if (*(t + i) / 5 > 0.4 && *(t + i) / 5 <= 0.5) {
+				s++;
+				frequency[4] = s;
+			}
+			if (*(t + i) / 5 > 0.5 && *(t + i) / 5 <= 0.6) {
+				z++;
+				frequency[5] = z;
+			}
+			if (*(t + i) / 5 > 0.6 && *(t + i) / 5 <= 0.7) {
+				j++;
+				frequency[6] = j;
+			}
+			if (*(t + i) / 5 > 0.7 && *(t + i) / 5 <= 0.8) {
+				p++;
+				frequency[7] = p;
+			}
+			if (*(t + i) / 5 > 0.8 && *(t + i) / 5 <= 0.9) {
+				y++;
+				frequency[8] = y;
+			}
+			if (*(t + i) / 5 > 0.9 && *(t + i) / 5 <= 1.0) {
+				h++;
+				frequency[9] = h;
+			}
+		}
+
 		for (int i = 0; i < 10; i++) {
 
-			std::cout << interval[i] << endl;
+			std::cout << interval[i]<<" "<<frequency[i]<< endl;
 
 		}
 
